@@ -11,7 +11,11 @@ export const ContentComponent = component$(
       <EnableEditor
         // LOOK HERE!!!
         // COMMENT THIS `unused` PROP OUT TO SEE THE CODE WORK.
-        unused={props.content}
+        // unused={'anything'} // WORKS
+        // unused={props.content} // BROKEN
+        // unused={props.content.blocks} // BROKEN
+        // unused={props.content.blocks[0]} // BROKEN
+        unused={props.content.blocks[0].testName} // BROKEN
         contentState={state.blocks[0]}
       >
         <div>BLOCKS (outside loop): {state.blocks[0]?.testName}</div>
