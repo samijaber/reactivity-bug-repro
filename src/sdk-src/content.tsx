@@ -4,7 +4,7 @@ import { component$, useStore } from "@builder.io/qwik";
 export const ContentComponent = component$(
   (props: { content: { blocks: { testName: string; id: number }[] } }) => {
     const state = useStore({
-      content: { ...props.content },
+      blocks: props.content.blocks,
     });
 
     return (
@@ -12,10 +12,10 @@ export const ContentComponent = component$(
         // LOOK HERE!!!
         // COMMENT THIS `unused` PROP OUT TO SEE THE CODE WORK.
         unused={props.content}
-        contentState={state}
+        contentState={state.blocks[0]}
       >
-        <div>BLOCKS (outside loop): {state.content.blocks[0]?.testName}</div>
-        {state.content.blocks.map((block) => (
+        <div>BLOCKS (outside loop): {state.blocks[0]?.testName}</div>
+        {state.blocks.map((block) => (
           <div key={block.id}>
             BLOCKS (inside loop): <span>{block.testName}</span>
           </div>
