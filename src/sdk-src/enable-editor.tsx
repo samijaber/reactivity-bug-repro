@@ -11,6 +11,7 @@ export const EnableEditor = component$((props: BuilderEditorProps) => {
     <>
       <button
         onClick$={$(() => {
+          console.log("props.contentState", props.contentState);
           props.contentState.testName = "UPDATE";
         })}
       >
