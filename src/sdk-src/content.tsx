@@ -1,29 +1,25 @@
-import type { BuilderContent } from "~/sdk-src/types/builder-content";
-import Blocks from "./blocks";
 import EnableEditor from "./enable-editor";
 import { component$, useStore } from "@builder.io/qwik";
 
 export const ContentComponent = component$(
-  (props: { content: BuilderContent }) => {
-    const state = useStore<any>(
-      {
-        builderContextSignal: {
-          content: { ...props.content },
-        },
-      },
-      { deep: true }
-    );
+  (props: { content: { blocks: { testName: string; id: number }[] } }) => {
+    const state = useStore({
+      content: { ...props.content },
+    });
 
     return (
       <EnableEditor
         // LOOK HERE!!!
-        // COMMENT THIS `content` PROP OUT TO SEE THE CODE WORK.
-        content={props.content}
-        builderContextSignal={state.builderContextSignal}
+        // COMMENT THIS `unused` PROP OUT TO SEE THE CODE WORK.
+        unused={props.content}
+        contentState={state}
       >
-        <Blocks
-          blocks={state.builderContextSignal.content?.data?.blocks}
-        ></Blocks>
+        <div>BLOCKS (outside loop): {state.content.blocks[0]?.testName}</div>
+        {state.content.blocks.map((block) => (
+          <div key={block.id}>
+            BLOCKS (inside loop): <span>{block.testName}</span>
+          </div>
+        ))}
       </EnableEditor>
     );
   }
