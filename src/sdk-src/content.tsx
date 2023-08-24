@@ -14,8 +14,8 @@ export const ContentComponent = component$<{
       // unused={'anything'} // WORKS
       // unused={props.blocks} // BROKEN
       // unused={props.blocks[0]} // BROKEN
-      // unused={props.blocks[0].testName} // BROKEN
-      contentState={state[0]} // broken
+      unused={props.blocks[0].testName} // BROKEN
+      contentState={state[0]}
     >
       <div>BLOCKS (outside loop): {state[0]?.testName}</div>
       {state.map((block, idx) => (
